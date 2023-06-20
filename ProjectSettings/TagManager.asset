@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 209229469
+    locked: 0
+  - name: Floor
+    uniqueID: 3893833323
+    locked: 0
+  - name: Walls
+    uniqueID: 1712490663
+    locked: 0
+  - name: Player
+    uniqueID: 1700315393
+    locked: 0
+  - name: Slime
+    uniqueID: 211834463
+    locked: 0

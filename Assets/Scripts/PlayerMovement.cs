@@ -29,50 +29,38 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //if W is pressed 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
+            anim.enabled = true;
             anim.SetTrigger("BackwardAnimation");
         }
 
-        //if W is released
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            anim.SetTrigger("BackwardAnimationPause");
-        }
+
         //if A is pressed 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            anim.enabled = true;
             anim.SetTrigger("LeftAnimation");
         }
 
-        //if A is released
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            anim.SetTrigger("LeftAnimationPause");
-        }
 
         //if S is pressed 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
+            anim.enabled = true;
             anim.SetTrigger("ForwardAnimation");
         }
 
-        //if S is released
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            anim.SetTrigger("ForwardAnimationPause");
-        }
-
         //if D is pressed 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            anim.enabled = true;
             anim.SetTrigger("RightAnimatio");
         }
 
-        //if D is released
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.W))
         {
-            anim.SetTrigger("RightAnimationPause");
+            anim.enabled = false;
         }
 
     }
