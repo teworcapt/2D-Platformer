@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     // Access Animator to play animations
     public Animator anim;
 
+    //
+    public int coinsCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //if W is pressed 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -61,7 +65,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.W))
         {
             anim.enabled = false;
-        }
+        } */
+
+        anim.SetFloat("Horizontal", movementInput.x);
+        anim.SetFloat("Vertical", movementInput.y);
+        anim.SetFloat("Speed", movementInput.sqrMagnitude );
 
     }
 
@@ -77,5 +85,15 @@ public class PlayerMovement : MonoBehaviour
     {
         // Converts WASD controls to Vector 2 values (X,Y)
         movementInput = inputValue.Get<Vector2>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Coins"))
+        {
+            Destroy(collision.gameObject);
+            coinsCount++;
+
+        }
     }
 }
