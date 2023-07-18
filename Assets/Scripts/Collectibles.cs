@@ -15,7 +15,6 @@ public class Collectibles : MonoBehaviour
     void Start()
     {
         baseMovespeed = player.moveSpeed;
-        StartCoroutine(BackToBaseSpeed());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,11 +22,12 @@ public class Collectibles : MonoBehaviour
         if (speed)
         {
             player.moveSpeed += speedBoost;
+            StartCoroutine(BackToBaseSpeed());
         }
         
         if (health)
         {
-            player.healthPoints+= healthBoost;
+            player.healthPoints += healthBoost;
         }
 
     }
@@ -41,6 +41,6 @@ public class Collectibles : MonoBehaviour
     IEnumerator BackToBaseSpeed()
     {
         yield return new WaitForSeconds(duration);
-        player.moveSpeed= baseMovespeed;
+        player.moveSpeed = baseMovespeed;
     }
 }

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerMovement : MonoBehaviour
 {
-    //Speed (Speed Navigation Ingame)
-    public int moveSpeed;
+    public TextMeshProUGUI CoinsTextMeshPro, HPValueTextMeshPro;
+    public int moveSpeed, coinsCount, healthPoints, chestAmt;
 
     //RigidBody (Physics)
     public Rigidbody2D rigidBody;
@@ -16,10 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     // Access Animator to play animations
     public Animator anim;
-
-    public int coinsCount;
-
-    public int healthPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -32,47 +30,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        //if W is pressed 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("BackwardAnimation");
-        }
-
-
-        //if A is pressed 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("LeftAnimation");
-        }
-
-
-        //if S is pressed 
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("ForwardAnimation");
-        }
-
-        //if D is pressed 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("RightAnimatio");
-        }
-
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.W))
-        {
-            anim.enabled = false;
-        } */
 
         anim.SetFloat("Horizontal", movementInput.x);
         anim.SetFloat("Vertical", movementInput.y);
         anim.SetFloat("Speed", movementInput.sqrMagnitude );
 
-    }
+        HPValueTextMeshPro.text = healthPoints.ToString();
+        CoinsTextMeshPro.text = coinsCount.ToString();
+
+}
 
     // Fixed frames unlike Update [Physics Calculation]
     private void FixedUpdate()
@@ -97,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Chest"))
+        {
+            coinsCount += chestAmt;
+            Destroy(collision.gameObject);
+        }
 
         if (collision.gameObject.CompareTag("Health"))
         {
